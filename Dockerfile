@@ -25,6 +25,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
+
+# Copy service account JSON
+COPY service-account.json /app/service-account.json
+
+# Set environment variable
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/service-account.json
+
+
 # Create directories for logs if they don't exist
 RUN mkdir -p system_log reports
 

@@ -4,12 +4,12 @@ from google.genai import types
 def generate():
   client = genai.Client(
       vertexai=True,
-      project="nth-droplet-458903-p4",
+      project="singular-agent-476403-u1",
       location="us-central1",
   )
 
 
-  model = "gemini-2.5-pro-preview-05-06"
+  model = "gemini-2.5-pro"
   contents = [
     types.Content(
       role="user",

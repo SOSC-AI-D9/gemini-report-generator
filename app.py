@@ -42,8 +42,8 @@ class ReportConfig(BaseModel):
     orientation: Optional[str] = "landscape" 
     credit_card_product_type: Optional[str] = "Premium Credit Cards"
     writing_style: Optional[WritingStyle] = None
-    model_id: Optional[str] = "gemini-2.5-pro-preview-05-06"
-    flash_model_id: Optional[str] = "gemini-2.5-flash-preview-04-17"
+    model_id: Optional[str] = "gemini-2.5-pro"
+    flash_model_id: Optional[str] = "gemini-2.5-flash"
     safety_settings: Optional[List[Dict]] = None
 
     @validator('orientation')

@@ -52,11 +52,11 @@ def polish_content(
 
     # Then compose the full user prompt
     user_prompt = Part.from_text(text=f"""
-    You are a professional {language} editor with strong business writing experience. Improve the content's narrative flow and transitions while preserving its language, tone, and cultural context. Return only the revised text—no introductions, explanations, or additional information.
+    You are a professional {language} editor with strong e-commerce and retail business writing experience. Improve the content's narrative flow and transitions while preserving its language, tone, and cultural context. Return only the revised text—no introductions, explanations, or additional information.
 
     Requirements:
     - Improve sentence flow, paragraph transitions, and overall readability
-    - Maintain a professional tone for banking and financial analysis
+    - Maintain a professional tone for e-commerce and retail market analysis
     - Preserve all key content, analysis, terms, data, and cultural context
     - Do not alter layout (indentation, line breaks, bulleting, paragraphing)
     - Do not add introductions, explanations, descriptions or additional information. If the content is already well written, just return it as is.

@@ -47,7 +47,7 @@ def generate_section_content(
     primary_bank = report_config['primary_bank']
     
     user_prompt = Part.from_text(text=f"""
-    You are a strategic report writer. Your task is to compose a comprehensive, professionally worded section of our strategic report titled **{section_title}**, intended for {primary_bank}'s {report_config['language']}-speaking executive audience, including the CFO and other C-level stakeholders.
+    You are a strategic e-commerce and retail analyst. Your task is to compose a comprehensive, professionally worded section of our competitive analysis report titled **{section_title}**, intended for {primary_bank}'s {report_config['language']}-speaking executive audience, including the Chief Commercial Officer and other C-level stakeholders.
 
     Use the guidance from the table of contents **only internally** to shape structure and coverage. **Do not include or reference** the guidance or section titles in the output.
 
@@ -86,7 +86,7 @@ def generate_section_content(
 
     Only include information that:
     1. Has been **verified by at least 2–3 trustworthy, recent sources**.
-    2. Is **current, credible, and relevant** to the section’s scope.
+    2. Is **current, credible, and relevant** to the section's scope.
 
     If a point cannot be verified, either **omit it** or explicitly mark it as unverified.
 
@@ -96,15 +96,15 @@ def generate_section_content(
 
     For every confirmed data point:
     - Provide a **detailed analysis**
-    - Include **market or industry context**
+    - Include **market or retail industry context**
     - Explain **implications for {primary_bank}**
-    - Connect to **broader macro or financial trends**
+    - Connect to **broader e-commerce trends and consumer behavior patterns**
 
     Additionally:
     - Include **specific statistics or numbers** when available.
     - Integrate **relevant direct quotes** from reliable sources.
-    - Analyze **trends, relationships, and patterns** in data.
-    - Draw **insightful connections** across topics.
+    - Analyze **trends, competitive positioning, and patterns** in market data.
+    - Draw **insightful connections** across product categories and customer segments.
 
     ---
 
@@ -112,28 +112,29 @@ def generate_section_content(
 
     - Use a **flowing, narrative style** with smooth transitions.
     - Maintain a **professional, analytical, and engaging tone**.
-    - Avoid dry enumeration—**build a compelling story**.
-    - Ensure the writing is appropriate for a **{report_config['language']}-speaking, executive audience**.
+    - Avoid dry enumeration—**build a compelling competitive story**.
+    - Ensure the writing is appropriate for a **{report_config['language']}-speaking, retail/e-commerce executive audience**.
 
     ---
 
     ## DATA PRESENTATION RULES
 
     When presenting data:
-    - Use **tables** for structured comparisons.
+    - Use **tables** for structured product/service comparisons.
     - Format using **markdown table syntax**:
     
-    | Metric | Value | Comparison |
-    |--------|-------|------------|
-    | Example | 20% | +5pp YoY |
+    | Metric | {primary_bank} | Competitor A | Competitor B |
+    |--------|-------|-------|----------|
+    | Product Range | 150+ items | 120 items | 180 items |
 
     - Add explanatory **captions or context** before/after tables.
     - Use tables for:
-    - Financial or KPI comparisons
-    - Market share breakdowns
-    - Performance metrics
-    - Cost structures
-    - Feature or service comparisons
+    - Product offerings and feature comparisons
+    - Pricing and promotional strategy analysis
+    - Market share and sales performance
+    - Customer satisfaction metrics
+    - Service level comparisons
+    - Logistics and fulfillment capabilities
 
     Ensure each table integrates smoothly with surrounding analysis.
 
@@ -143,8 +144,8 @@ def generate_section_content(
 
     - Turn bullet points into cohesive, analytical paragraphs.
     - Use **active voice** and strong verbs.
-    - Support all points with **data, examples, or source citations**.
-    - End with **forward-looking insights** or recommendations when relevant.
+    - Support all points with **data, examples, customer reviews, or source citations**.
+    - End with **forward-looking insights** or competitive recommendations when relevant.
 
     ---
 
@@ -155,6 +156,7 @@ def generate_section_content(
     - All numbers, statistics, and quotes are accurate.
     - The section is internally consistent and coherent.
     - All formatting and style guidelines are followed.
+    - Competitive comparisons are fair and objective.
 
     ---
 

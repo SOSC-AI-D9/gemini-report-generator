@@ -17,7 +17,7 @@ def setup_client_and_tools() -> Tuple['genai.Client', Tool]:
     """
     client = genai.Client(
         vertexai=True,
-        project="nth-droplet-458903-p4",
+        project="singular-agent-476403-u1",
         location="us-central1",
     )
     google_search_tool = Tool(google_search=GoogleSearch())
@@ -86,7 +86,7 @@ def table_of_contents_prompt(
         # Create user prompt with error handling
         try:
             user_prompt_text = f"""
-                Create a professional **Table of Contents** in **{report_config['language']}** for an **executive-level strategic report** comparing **{credit_card_product_type}** products from **{report_config['primary_bank']}** and **{', '.join(report_config['comparison_banks'])}**. This TOC will serve as a **planner for a language model** to generate the full report, so clarity, logical flow, and completeness are essential.
+                Create a professional **Table of Contents** in **{report_config['language']}** for an **executive-level strategic report** analyzing and comparing **{credit_card_product_type}** products and services from **{report_config['primary_bank']}** and competitors: **{', '.join(report_config['comparison_banks'])}**. This TOC will serve as a **planner for a language model** to generate the full report, so clarity, logical flow, and completeness are essential.
                 The report is for the **Executives of {report_config['primary_bank']}** and should follow a smooth, narrative-driven structure.
 
                 **Report Structure:**
@@ -95,15 +95,15 @@ def table_of_contents_prompt(
 
                 **Instructions:**
 
-                * Write a **concise and impactful** report title in **{report_config['language']}** that reflects the **comparative analysis of credit card products** and speaks to the strategic interests of **{report_config['primary_bank']}** executives.
+                * Write a **concise and impactful** report title in **{report_config['language']}** that reflects the **competitive e-commerce analysis** of **{credit_card_product_type}** products and speaks to the strategic interests of **{report_config['primary_bank']}** executives.
                 * All main sections marked with Roman numerals (e.g., I., II., III.), and use **colons** or **dashes** to separate sub-sections, **never parentheses**.
                 * All section and subsection **titles and guidance** must be written in **formal {report_config['language']} business language**.
                 * Each section and subsection must have a **concise description** in **{report_config['language']}**, outlining its purpose and guiding the content generation.
-                * Ensure the tone is suitable for a **C-level financial audience**, emphasizing actionable insights and local market relevance. The focus should be on **strategic financial decision-making** and **product differentiation**.
-                * Maintain cultural and linguistic appropriateness for a banking/finance readership.
+                * Ensure the tone is suitable for a **C-level retail/e-commerce audience**, emphasizing actionable insights and local market relevance. The focus should be on **strategic market positioning**, **competitive differentiation**, and **customer experience**.
+                * Maintain cultural and linguistic appropriateness for a retail/e-commerce readership.
                 * Do not include **References** and **Appendices** section in this Table of Contents.
                 * **IMPORTANT:** Do not use parentheses () in section titles. Instead, use **colons** or **dashes** to separate additional information.
-                * Ensure **all sections** are **directly relevant** to the **local market** and **banking executives' decision-making**.
+                * Ensure **all sections** are **directly relevant** to the **local market** and **retail/e-commerce executives' strategic decision-making**.
 
                 **IMPORTANT:** Use the **Google Search tool** to gather the most recent and relevant information to ensure the TOC supports accurate and updated content generation.
             """
@@ -142,7 +142,7 @@ def table_of_contents_prompt(
             # # log the contents
             # vertex_client = genai.Client(
             #     vertexai=True,
-            #     project="nth-droplet-458903-p4",
+            #     project="singular-agent-476403-u1",
             #     location="us-central1",
             # )
             # Call API

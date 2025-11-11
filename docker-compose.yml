@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     environment:
-      GOOGLE_APPLICATION_CREDENTIALS: /app/.config/gcloud/application_default_credentials.json
+      GOOGLE_APPLICATION_CREDENTIALS: /app/service-account.json
     volumes:
       - ${HOME}/.config/gcloud:/app/.config/gcloud
       - ./reports:/app/reports

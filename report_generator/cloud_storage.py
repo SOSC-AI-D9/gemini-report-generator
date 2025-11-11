@@ -28,8 +28,8 @@ def upload_to_gcs(pdf_file, request_id, config: Optional[Dict[str, Any]] = None)
         # Use provided config or fall back to default
         report_config = config or DEFAULT_REPORT_CONFIG
         
-        storage_client = storage.Client(project="nth-droplet-458903-p4")
-        bucket = storage_client.bucket('credit-card-reports')
+        storage_client = storage.Client(project="singular-agent-476403-u1")
+        bucket = storage_client.bucket('miranda-reports-data')
         language_folder = report_config['language'].lower()
         blob_name = f"{language_folder}/{os.path.basename(pdf_file)}"
         blob = bucket.blob(blob_name)
