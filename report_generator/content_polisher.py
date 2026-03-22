@@ -1,7 +1,7 @@
 import logging
 from typing import Tuple, Dict, Any, Optional
 from google.genai.types import Part, Content, GenerateContentConfig
-from config import REPORT_CONFIG as DEFAULT_REPORT_CONFIG
+from config import build_runtime_config
 from utils import retry_with_backoff, log_to_request_file
 
 logger = logging.getLogger(__name__)
@@ -31,11 +31,11 @@ def polish_content(
     Raises:
         Exception: If content polishing fails after retries.
     """
-    logger.info("✨ Polishing content...")
-    log_to_request_file(request_id, "polishing", "✨ Polishing content...")
+    logger.info("Polishing content...")
+    log_to_request_file(request_id, "polishing", "Polishing content...")
     
     # Use provided config or fall back to default
-    report_config = config or DEFAULT_REPORT_CONFIG
+    report_config = build_runtime_config(config)
     
     # Build localization section separately
     language = report_config['language']
@@ -52,7 +52,7 @@ def polish_content(
 
     # Then compose the full user prompt
     user_prompt = Part.from_text(text=f"""
-    You are a professional {language} editor with strong e-commerce and retail business writing experience. Improve the content's narrative flow and transitions while preserving its language, tone, and cultural context. Return only the revised text—no introductions, explanations, or additional information.
+    You are a professional {language} editor with strong e-commerce and retail business writing experience. Improve the content's narrative flow and transitions while preserving its language, tone, and cultural context. Return only the revised text-no introductions, explanations, or additional information.
 
     Requirements:
     - Improve sentence flow, paragraph transitions, and overall readability
@@ -89,6 +89,7 @@ def polish_content(
         )
     )
     text = response.text
-    logger.info("✅ Content polished successfully")
-    log_to_request_file(request_id, "polishing", "✅ Content polished successfully")
+    logger.info("OK Content polished successfully")
+    log_to_request_file(request_id, "polishing", "OK Content polished successfully")
     return text, response
+

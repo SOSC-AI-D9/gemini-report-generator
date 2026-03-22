@@ -1,18 +1,25 @@
-from fastapi import FastAPI, BackgroundTasks, HTTPException, Query
-from datetime import datetime
-import uuid
-import mimetypes
-from google.cloud import storage
 import csv
-import os
-from typing import List, Dict, Optional, Any
-from main1 import main
-from fastapi.middleware.cors import CORSMiddleware
-import pandas as pd
-from pydantic import BaseModel, validator
 import math
+import mimetypes
+import re
+import uuid
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import pandas as pd
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from google.cloud import storage
+from pydantic import BaseModel, validator
+
+from main1 import main
+from utils import sanitize_request_id
 
 app = FastAPI()
+LOGGING_CSV_PATH = Path("logging.csv")
+SYSTEM_LOG_DIR = Path("system_log")
+BUCKET_NAME_PATTERN = re.compile(r"^[a-z0-9._-]{3,63}$")
 
 ## CORS
 app.add_middleware(
@@ -107,6 +114,11 @@ class StatisticsResponse(BaseModel):
 class ReportGenerationRequest(BaseModel):
     config: ReportConfig
 
+def _model_to_dict(model: BaseModel) -> Dict[str, Any]:
+    if hasattr(model, "model_dump"):
+        return model.model_dump()
+    return model.dict()
+
 def run_report_generation(request_id: str, config: dict = None):
     """Run the report generation process in a background thread."""
     try:
@@ -126,7 +138,7 @@ async def generate_report(request: ReportGenerationRequest, background_tasks: Ba
     request_id = f"{datetime.now().strftime('%Y%m%d')}_{str(uuid.uuid4())[:8]}"
     
     # Start the report generation process in a background thread with custom config
-    background_tasks.add_task(run_report_generation, request_id, request.config.dict())
+    background_tasks.add_task(run_report_generation, request_id, _model_to_dict(request.config))
     
     return {
         "status": "started",
@@ -147,16 +159,21 @@ async def get_request_logs(request_id: str):
     Raises:
         HTTPException: If the log file doesn't exist.
     """
-    log_file = os.path.join("system_log", f"request_{request_id}.csv")
+    try:
+        safe_request_id = sanitize_request_id(request_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    log_file = SYSTEM_LOG_DIR / f"request_{safe_request_id}.csv"
     
-    if not os.path.exists(log_file):
+    if not log_file.exists():
         raise HTTPException(
             status_code=404,
             detail=f"No logs found for request ID: {request_id}"
         )
     
     logs = []
-    with open(log_file, 'r', encoding='utf-8') as f:
+    with log_file.open("r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             logs.append({
@@ -179,17 +196,22 @@ async def get_request_metrics(request_id: str):
     Raises:
         HTTPException: If the logging.csv file doesn't exist or no metrics found for request_id.
     """
-    if not os.path.exists("logging.csv"):
+    try:
+        safe_request_id = sanitize_request_id(request_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    if not LOGGING_CSV_PATH.exists():
         raise HTTPException(
             status_code=404,
             detail="No metrics found (logging.csv does not exist)"
         )
     
     metrics = []
-    with open("logging.csv", 'r', encoding='utf-8') as f:
+    with LOGGING_CSV_PATH.open("r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if row["Request ID"] == request_id:
+            if row["Request ID"] == safe_request_id:
                 metrics.append({
                     "timestamp": row["Timestamp"],
                     "section": row["Section"],
@@ -229,14 +251,14 @@ async def get_statistics(
     Raises:
         HTTPException: If logging.csv does not exist or no data found.
     """
-    if not os.path.exists("logging.csv"):
+    if not LOGGING_CSV_PATH.exists():
         raise HTTPException(
             status_code=404,
             detail="No metrics found (logging.csv does not exist)"
         )
     
     # Load the CSV file
-    df = pd.read_csv("logging.csv")
+    df = pd.read_csv(LOGGING_CSV_PATH)
     
     # Convert Timestamp to datetime
     df["Timestamp"] = pd.to_datetime(df["Timestamp"])
@@ -244,8 +266,10 @@ async def get_statistics(
     # Apply date filtering if provided
     if start_date and end_date:
         try:
+            start_dt = pd.to_datetime(start_date)
+            end_dt = pd.to_datetime(end_date)
             df = df[
-                (df["Timestamp"] >= start_date) & (df["Timestamp"] <= end_date)
+                (df["Timestamp"] >= start_dt) & (df["Timestamp"] <= end_dt)
             ]
         except Exception as e:
             raise HTTPException(
@@ -333,7 +357,7 @@ def human_readable_size(size_bytes: int) -> str:
     s = round(size_bytes / p, 2)
     return f"{s} {size_name[i]}"
 
-def build_tree_from_blobs(blobs, bucket_name: str) -> Dict[str, Any]:
+def build_tree_from_blobs(blobs: Any, bucket_name: str) -> Dict[str, Any]:
     tree = {}
 
     for blob in blobs:
@@ -378,6 +402,8 @@ def list_bucket_objects_tree(bucket_name: str) -> Dict[str, Any]:
 
 @app.get("/api/directory/{bucket_name}")
 def get_bucket_tree(bucket_name: str):
+    if not BUCKET_NAME_PATTERN.fullmatch(bucket_name):
+        raise HTTPException(status_code=400, detail="Invalid bucket name format")
     return {
         "bucket": bucket_name,
         "tree": list_bucket_objects_tree(bucket_name)

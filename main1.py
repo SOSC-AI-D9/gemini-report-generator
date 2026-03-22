@@ -1,19 +1,18 @@
 import logging
 from typing import List, Tuple, Dict, Any, Optional
 from google.genai.types import Part
-from config import REPORT_CONFIG as DEFAULT_REPORT_CONFIG
+from config import build_runtime_config
 from report_generator.toc_generator import setup_client_and_tools, table_of_contents_prompt, extract_table_of_contents
 from report_generator.section_generator import generate_section_content
 from report_generator.content_polisher import polish_content
 from report_generator.file_output import save_report_files
 from report_generator.cloud_storage import upload_to_gcs
 import csv
-from utils import log_to_request_file
+from utils import ensure_request_log_file, initialize_request, log_to_request_file
 from datetime import datetime
 import os
 import socket
 from os import getenv
-import uuid
 
 # Configure logging
 logging.basicConfig(
@@ -52,7 +51,6 @@ class ReportState:
         self.report_references = []
         self.current_request_id = None
         self.LOGGING_CSV = "logging.csv"
-        self.request_log_file = None
         self.config = None
 
 def setup_request_logging(state: ReportState) -> None:
@@ -63,20 +61,9 @@ def setup_request_logging(state: ReportState) -> None:
     """
     if not state.current_request_id:
         state.current_request_id = initialize_request()
-    
-    # Create system_log directory if it doesn't exist
-    system_log_dir = "system_log"
-    if not os.path.exists(system_log_dir):
-        os.makedirs(system_log_dir)
-    
-    # Create request-specific log file in system_log directory
-    state.request_log_file = os.path.join(system_log_dir, f"request_{state.current_request_id}.csv")
-    headers = ["Timestamp", "Status", "Message"]
-    
+
     try:
-        with open(state.request_log_file, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(headers)
+        ensure_request_log_file(state.current_request_id)
     except Exception as e:
         logger.error(f"Error creating request log file: {str(e)}")
 
@@ -88,16 +75,10 @@ def log_request_status(state: ReportState, status: str, message: str) -> None:
         status: The current status of the request.
         message: The message to log.
     """
-    if not state.request_log_file:
-        setup_request_logging(state)
-    
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    try:
-        with open(state.request_log_file, 'a', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow([timestamp, status, message])
-    except Exception as e:
-        logger.error(f"Error writing to request log file: {str(e)}")
+    if not state.current_request_id:
+        state.current_request_id = initialize_request()
+
+    log_to_request_file(state.current_request_id, status, message)
     
     # Map status to emoji
     status_emoji = {
@@ -325,25 +306,6 @@ def get_system_prompt(config: Dict[str, Any]) -> str:
         """
 
 
-def initialize_request() -> str:
-    """Initialize a new request with a unique ID and setup logging.
-    
-    Returns:
-        str: The generated request ID.
-    """
-    request_id = f"{datetime.now().strftime('%Y%m%d')}_{str(uuid.uuid4())[:8]}"
-    
-    # Create request log file
-    log_file = f"request_{request_id}.csv"
-    try:
-        with open(log_file, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(["Timestamp", "Status", "Message"])
-    except Exception as e:
-        logger.error(f"Error creating request log file: {str(e)}")
-    
-    return request_id
-
 def main(request_id: str = None, config: Optional[Dict[str, Any]] = None):
     """Orchestrate the report generation process.
     
@@ -357,8 +319,7 @@ def main(request_id: str = None, config: Optional[Dict[str, Any]] = None):
     if request_id is None:
         request_id = initialize_request()
 
-    # Use provided config or fall back to default
-    report_config = config or DEFAULT_REPORT_CONFIG.copy()  # Make a copy to avoid modifying the original
+    report_config = build_runtime_config(config)
     
     # Check for orientation in environment variable
     env_orientation = os.environ.get("REPORT_ORIENTATION")
@@ -445,7 +406,7 @@ def main(request_id: str = None, config: Optional[Dict[str, Any]] = None):
     
     # Upload to GCS
     public_url = upload_to_gcs(pdf_file, state.current_request_id, report_config)
-    log_request_status(state, "url", f"🌐 Public URL: {public_url}");
+    log_request_status(state, "url", f"🌐 Public URL: {public_url}")
 
     # Log final metrics
     log_final_metrics(state)

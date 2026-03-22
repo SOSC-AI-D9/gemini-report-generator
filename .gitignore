@@ -40,6 +40,11 @@ reports/
 # Environment variables
 .env
 .env.local
+.env.*
 
 # Demo reports
 demo_reports/
+
+# Secrets and credentials
+service_account.json
+*credentials*.json

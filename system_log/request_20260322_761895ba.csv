@@ -1,0 +1,47 @@
+Timestamp,Status,Message
+2026-03-22 20:34:28,initialize,🚀 Starting report generation process...
+2026-03-22 20:34:28,initialize,🚀 Request created: 20260322_761895ba
+2026-03-22 20:34:28,config,🧱 Scanning configuration parameters
+2026-03-22 20:34:28,config,🌐 Report language: English
+2026-03-22 20:34:28,config,🏦 Your bank: Kookmin Bank
+2026-03-22 20:34:28,config,"🏢 You are comparing with: KEB Hana Bank, Woori Bank, Shinhan Bank"
+2026-03-22 20:34:28,config,"📊 The report will focus on: Market Share and Growth, Revenue and Profitability, Customer Acquisition Cost, Customer Lifetime Value, Digital Transformation Impact, Competitive Positioning"
+2026-03-22 20:34:28,config,"📈 The report will track these metrics: Card Issuance Volume, Transaction Volume, Revenue per Card, Customer Retention Rate, Digital Adoption Rate, Market Share by Segment"
+2026-03-22 20:34:28,config,"👥 The report will be tailored to these market segments: High Net Worth Individuals, Business Professionals, Digital-First Customers, Loyalty Program Members"
+2026-03-22 20:34:28,config,"📋 The report will have these sections: Executive Summary, Premium Credit Card Product Comparison, Pricing and Fee Analysis, Rewards and Benefits Comparison, Digital Features and Mobile Banking, Customer Service and Support, Market Performance Metrics, Recommendations and Next Steps, Conclusion"
+2026-03-22 20:34:28,config,📏 Strict structure: False
+2026-03-22 20:34:28,config,🧪 Experimental mode: True
+2026-03-22 20:34:28,config,📄 Report orientation: portrait
+2026-03-22 20:34:28,info,💲 You can view the cost metrics for this request at http://192.168.100.3:8000/api/metrics/20260322_761895ba
+2026-03-22 20:34:28,info,"ℹ️ To view the system log, please visit http://192.168.100.3:8000/api/logs/20260322_761895ba"
+2026-03-22 20:34:29,generating,💭 Report generation process started. This may take a while.
+2026-03-22 20:34:29,generating,📋 Generating Table of Contents...
+2026-03-22 20:34:29,generating,📝 Generating Table of Contents with model: gemini-2.5-pro
+2026-03-22 20:34:29,generating,Generating content with gemini-2.5-pro...
+2026-03-22 20:35:04,generating,✅ Table of Contents generated successfully
+2026-03-22 20:35:04,generating,📋 Extracting main sections from Table of Contents...
+2026-03-22 20:35:04,generating,Extracting TOC with model: gemini-2.5-flash
+2026-03-22 20:35:05,generating,✅ Sections extracted successfully
+2026-03-22 20:35:05,generating,📑 Report Title: Competitive Analysis of the South Korean Premium Credit Card Market: A Strategic Report for Kookmin Bank
+2026-03-22 20:35:05,generating,"🔍 Extracted 9 sections: I. Executive Summary, II. Introduction: The South Korean Premium Credit Card Landscape, III. Competitive Product Portfolio Analysis: Premium Credit Cards, IV. Pricing and Fee Structure: A Comparative Benchmark, V. Rewards and Benefits Ecosystem: The Core of Premium Value, VI. Digital Experience and Customer Engagement, VII. Market Positioning and Brand Perception, VIII. Strategic Recommendations for Kookmin Bank, IX. Conclusion"
+2026-03-22 20:35:05,generating,📝 Generating section 1: II. Introduction: The South Korean Premium Credit Card Landscape
+2026-03-22 20:35:38,generating,✅ Section 1 content generated successfully
+2026-03-22 20:35:38,polishing,✨ Polishing section 1: II. Introduction: The South Korean Premium Credit Card Landscape
+2026-03-22 20:35:38,polishing,✨ Polishing content...
+2026-03-22 20:35:47,polishing,✅ Content polished successfully
+2026-03-22 20:35:47,generating,✅ Section 1 completed: II. Introduction: The South Korean Premium Credit Card Landscape
+2026-03-22 20:35:47,saving,💾 Saving report files with base name: competitive_analysis_of_the_south_korean_premium_credit_card_market:_a_strategic_report_for_kookmin_bank_20260322_203547
+2026-03-22 20:35:47,saving,✅ Saved Markdown file: reports\20260322_203547_20260322_761895ba_english.md
+2026-03-22 20:35:47,saving,✅ Saved HTML file: reports\20260322_203547_20260322_761895ba_english.html
+2026-03-22 20:35:48,saving,✅ Saved PDF file: reports\20260322_203547_20260322_761895ba_english.pdf
+2026-03-22 20:35:48,uploading,📤 Uploading PDF to Google Cloud Storage...
+2026-03-22 20:35:50,uploading,✅ PDF uploaded successfully to english folder: english/20260322_203547_20260322_761895ba_english.pdf
+2026-03-22 20:35:50,url,🌐 Public URL: https://storage.googleapis.com/generated-report-ai/english/20260322_203547_20260322_761895ba_english.pdf
+2026-03-22 20:35:50,metrics,======================================================================
+2026-03-22 20:35:50,metrics,📊 Overall Total Usage:
+2026-03-22 20:35:50,metrics,"   ├─ Total Input Tokens:  9,534"
+2026-03-22 20:35:50,metrics,"   ├─ Total Output Tokens: 2,761"
+2026-03-22 20:35:50,metrics,"   └─ Total All Tokens:   12,295"
+2026-03-22 20:35:50,metrics,   └─ Total Cost:         $0.027921
+2026-03-22 20:35:50,metrics,======================================================================
+2026-03-22 20:35:50,completed,✅ Report generation process completed!

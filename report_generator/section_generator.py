@@ -2,7 +2,7 @@ import logging
 import re
 from typing import Tuple, List, Dict, Any, Optional
 from google.genai.types import Part, Content, GenerateContentConfig, Tool
-from config import REPORT_CONFIG as DEFAULT_REPORT_CONFIG
+from config import build_runtime_config
 from utils import retry_with_backoff, log_to_request_file
 
 logger = logging.getLogger(__name__)
@@ -38,10 +38,10 @@ def generate_section_content(
     Raises:
         Exception: If content generation fails after retries.
     """
-    logger.info(f"📝 Generating section {section_number}: {section_title}")
+    logger.info(f"[Generate] Generating section {section_number}: {section_title}")
     
     # Use provided config or fall back to default
-    report_config = config or DEFAULT_REPORT_CONFIG
+    report_config = build_runtime_config(config)
     
     # Get key parameters from config
     primary_bank = report_config['primary_bank']
@@ -85,7 +85,7 @@ def generate_section_content(
     Use the provided **Google Search tool** to obtain the most recent and reliable information.
 
     Only include information that:
-    1. Has been **verified by at least 2–3 trustworthy, recent sources**.
+    1. Has been **verified by at least 2-3 trustworthy, recent sources**.
     2. Is **current, credible, and relevant** to the section's scope.
 
     If a point cannot be verified, either **omit it** or explicitly mark it as unverified.
@@ -112,7 +112,7 @@ def generate_section_content(
 
     - Use a **flowing, narrative style** with smooth transitions.
     - Maintain a **professional, analytical, and engaging tone**.
-    - Avoid dry enumeration—**build a compelling competitive story**.
+    - Avoid dry enumeration-**build a compelling competitive story**.
     - Ensure the writing is appropriate for a **{report_config['language']}-speaking, retail/e-commerce executive audience**.
 
     ---
@@ -221,6 +221,7 @@ def generate_section_content(
     else:
         logger.warning("Agent decided not to use Google Search for this section")
     
-    logger.info(f"✅ Section {section_number} content generated successfully")
-    log_to_request_file(request_id, "generating", f"✅ Section {section_number} content generated successfully")
+    logger.info(f"OK Section {section_number} content generated successfully")
+    log_to_request_file(request_id, "generating", f"OK Section {section_number} content generated successfully")
     return text, report_references, response
+

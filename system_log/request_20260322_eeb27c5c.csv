@@ -1,0 +1,49 @@
+Timestamp,Status,Message
+2026-03-22 20:31:34,initialize,🚀 Starting report generation process...
+2026-03-22 20:31:34,initialize,🚀 Request created: 20260322_eeb27c5c
+2026-03-22 20:31:34,config,🧱 Scanning configuration parameters
+2026-03-22 20:31:34,config,🌐 Report language: English
+2026-03-22 20:31:34,config,🏦 Your bank: Kookmin Bank
+2026-03-22 20:31:34,config,"🏢 You are comparing with: KEB Hana Bank, Woori Bank, Shinhan Bank"
+2026-03-22 20:31:34,config,"📊 The report will focus on: Market Share and Growth, Revenue and Profitability, Customer Acquisition Cost, Customer Lifetime Value, Digital Transformation Impact, Competitive Positioning"
+2026-03-22 20:31:34,config,"📈 The report will track these metrics: Card Issuance Volume, Transaction Volume, Revenue per Card, Customer Retention Rate, Digital Adoption Rate, Market Share by Segment"
+2026-03-22 20:31:34,config,"👥 The report will be tailored to these market segments: High Net Worth Individuals, Business Professionals, Digital-First Customers, Loyalty Program Members"
+2026-03-22 20:31:34,config,"📋 The report will have these sections: Executive Summary, Premium Credit Card Product Comparison, Pricing and Fee Analysis, Rewards and Benefits Comparison, Digital Features and Mobile Banking, Customer Service and Support, Market Performance Metrics, Recommendations and Next Steps, Conclusion"
+2026-03-22 20:31:34,config,📏 Strict structure: False
+2026-03-22 20:31:34,config,🧪 Experimental mode: True
+2026-03-22 20:31:34,config,📄 Report orientation: portrait
+2026-03-22 20:31:34,info,💲 You can view the cost metrics for this request at http://192.168.100.3:8000/api/metrics/20260322_eeb27c5c
+2026-03-22 20:31:34,info,"ℹ️ To view the system log, please visit http://192.168.100.3:8000/api/logs/20260322_eeb27c5c"
+2026-03-22 20:31:35,generating,💭 Report generation process started. This may take a while.
+2026-03-22 20:31:35,generating,📋 Generating Table of Contents...
+2026-03-22 20:31:35,generating,📝 Generating Table of Contents with model: gemini-2.5-pro
+2026-03-22 20:31:35,generating,Generating content with gemini-2.5-pro...
+2026-03-22 20:32:19,generating,✅ Table of Contents generated successfully
+2026-03-22 20:32:19,generating,📋 Extracting main sections from Table of Contents...
+2026-03-22 20:32:19,generating,Extracting TOC with model: gemini-2.5-flash
+2026-03-22 20:32:21,generating,✅ Sections extracted successfully
+2026-03-22 20:32:21,generating,📑 Report Title: Strategic Competitive Analysis: Positioning Kookmin Bank in the Premium Credit Card Market
+2026-03-22 20:32:21,generating,"🔍 Extracted 10 sections: I. Executive Summary, II. Introduction: The South Korean Premium Credit Card Market Landscape, III. Premium Credit Card Product Portfolio Comparison, IV. Pricing and Fee Structure Analysis, V. Rewards and Benefits Ecosystem Comparison, VI. Digital Customer Experience and Mobile Integration, VII. Customer Service and Support Channels, VIII. Market Performance and Competitive Positioning, IX. Strategic Recommendations and Actionable Next Steps, X. Conclusion"
+2026-03-22 20:32:21,generating,📝 Generating section 1: II. Introduction: The South Korean Premium Credit Card Market Landscape
+2026-03-22 20:33:08,generating,✅ Section 1 content generated successfully
+2026-03-22 20:33:08,polishing,✨ Polishing section 1: II. Introduction: The South Korean Premium Credit Card Market Landscape
+2026-03-22 20:33:08,polishing,✨ Polishing content...
+2026-03-22 20:33:26,polishing,✅ Content polished successfully
+2026-03-22 20:33:26,generating,✅ Section 1 completed: II. Introduction: The South Korean Premium Credit Card Market Landscape
+2026-03-22 20:33:26,saving,💾 Saving report files with base name: strategic_competitive_analysis:_positioning_kookmin_bank_in_the_premium_credit_card_market_20260322_203326
+2026-03-22 20:33:26,saving,✅ Saved Markdown file: reports\20260322_203326_20260322_eeb27c5c_english.md
+2026-03-22 20:33:26,saving,✅ Saved HTML file: reports\20260322_203326_20260322_eeb27c5c_english.html
+2026-03-22 20:33:27,error,"❌ Error generating PDF: No wkhtmltopdf executable found: ""b''""
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf"
+2026-03-22 20:33:27,saving,🔄 Falling back to HTML output due to PDF generation failure
+2026-03-22 20:33:27,uploading,📤 Uploading PDF to Google Cloud Storage...
+2026-03-22 20:33:29,uploading,✅ PDF uploaded successfully to english folder: english/20260322_203326_20260322_eeb27c5c_english.html
+2026-03-22 20:33:29,url,🌐 Public URL: https://storage.googleapis.com/generated-report-ai/english/20260322_203326_20260322_eeb27c5c_english.html
+2026-03-22 20:33:29,metrics,======================================================================
+2026-03-22 20:33:29,metrics,📊 Overall Total Usage:
+2026-03-22 20:33:29,metrics,"   ├─ Total Input Tokens:  11,232"
+2026-03-22 20:33:29,metrics,"   ├─ Total Output Tokens: 4,527"
+2026-03-22 20:33:29,metrics,"   └─ Total All Tokens:   15,759"
+2026-03-22 20:33:29,metrics,   └─ Total Cost:         $0.041194
+2026-03-22 20:33:29,metrics,======================================================================
+2026-03-22 20:33:29,completed,✅ Report generation process completed!

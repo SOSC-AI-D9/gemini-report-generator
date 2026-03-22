@@ -164,7 +164,7 @@ def log_final_metrics():
 
 client = genai.Client(
             vertexai=True,
-            project="singular-agent-476403-u1",
+            project="myagent-qitv",
             location="us-central1",
         )
 model_id = "gemini-2.5-pro"
@@ -732,7 +732,7 @@ try:
     from google.cloud import storage
     
     # Initialize the client
-    storage_client = storage.Client(project="singular-agent-476403-u1")
+    storage_client = storage.Client(project="myagent-qitv")
     bucket = storage_client.bucket('miranda-reports-data')
     
     # Upload PDF file to language-specific folder

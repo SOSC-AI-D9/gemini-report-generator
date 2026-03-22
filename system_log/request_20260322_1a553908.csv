@@ -1,0 +1,49 @@
+Timestamp,Status,Message
+2026-03-22 20:28:20,initialize,🚀 Starting report generation process...
+2026-03-22 20:28:20,initialize,🚀 Request created: 20260322_1a553908
+2026-03-22 20:28:20,config,🧱 Scanning configuration parameters
+2026-03-22 20:28:20,config,🌐 Report language: English
+2026-03-22 20:28:20,config,🏦 Your bank: Kookmin Bank
+2026-03-22 20:28:20,config,"🏢 You are comparing with: KEB Hana Bank, Woori Bank, Shinhan Bank"
+2026-03-22 20:28:20,config,"📊 The report will focus on: Market Share and Growth, Revenue and Profitability, Customer Acquisition Cost, Customer Lifetime Value, Digital Transformation Impact, Competitive Positioning"
+2026-03-22 20:28:20,config,"📈 The report will track these metrics: Card Issuance Volume, Transaction Volume, Revenue per Card, Customer Retention Rate, Digital Adoption Rate, Market Share by Segment"
+2026-03-22 20:28:20,config,"👥 The report will be tailored to these market segments: High Net Worth Individuals, Business Professionals, Digital-First Customers, Loyalty Program Members"
+2026-03-22 20:28:20,config,"📋 The report will have these sections: Executive Summary, Premium Credit Card Product Comparison, Pricing and Fee Analysis, Rewards and Benefits Comparison, Digital Features and Mobile Banking, Customer Service and Support, Market Performance Metrics, Recommendations and Next Steps, Conclusion"
+2026-03-22 20:28:20,config,📏 Strict structure: False
+2026-03-22 20:28:20,config,🧪 Experimental mode: True
+2026-03-22 20:28:20,config,📄 Report orientation: portrait
+2026-03-22 20:28:20,info,💲 You can view the cost metrics for this request at http://192.168.100.3:8000/api/metrics/20260322_1a553908
+2026-03-22 20:28:20,info,"ℹ️ To view the system log, please visit http://192.168.100.3:8000/api/logs/20260322_1a553908"
+2026-03-22 20:28:20,generating,💭 Report generation process started. This may take a while.
+2026-03-22 20:28:21,generating,📋 Generating Table of Contents...
+2026-03-22 20:28:21,generating,📝 Generating Table of Contents with model: gemini-2.5-pro
+2026-03-22 20:28:21,generating,Generating content with gemini-2.5-pro...
+2026-03-22 20:28:45,generating,✅ Table of Contents generated successfully
+2026-03-22 20:28:45,generating,📋 Extracting main sections from Table of Contents...
+2026-03-22 20:28:45,generating,Extracting TOC with model: gemini-2.5-flash
+2026-03-22 20:28:47,generating,✅ Sections extracted successfully
+2026-03-22 20:28:47,generating,📑 Report Title: Strategic Analysis of the Premium Credit Card Market: A Competitive Benchmarking of Kookmin Bank Against Key Rivals
+2026-03-22 20:28:47,generating,"🔍 Extracted 9 sections: I. Executive Summary, II. Premium Credit Card Product Comparison, III. Pricing and Fee Analysis, IV. Rewards and Benefits Comparison, V. Digital Features and Mobile Banking, VI. Customer Service and Support, VII. Market Performance Metrics, VIII. Recommendations and Next Steps, IX. Conclusion"
+2026-03-22 20:28:47,generating,📝 Generating section 1: II. Premium Credit Card Product Comparison
+2026-03-22 20:29:22,generating,✅ Section 1 content generated successfully
+2026-03-22 20:29:22,polishing,✨ Polishing section 1: II. Premium Credit Card Product Comparison
+2026-03-22 20:29:22,polishing,✨ Polishing content...
+2026-03-22 20:29:37,polishing,✅ Content polished successfully
+2026-03-22 20:29:37,generating,✅ Section 1 completed: II. Premium Credit Card Product Comparison
+2026-03-22 20:29:37,saving,💾 Saving report files with base name: strategic_analysis_of_the_premium_credit_card_market:_a_competitive_benchmarking_of_kookmin_bank_against_key_rivals_20260322_202937
+2026-03-22 20:29:37,saving,✅ Saved Markdown file: reports\20260322_202937_20260322_1a553908_english.md
+2026-03-22 20:29:37,saving,✅ Saved HTML file: reports\20260322_202937_20260322_1a553908_english.html
+2026-03-22 20:29:37,error,"❌ Error generating PDF: No wkhtmltopdf executable found: ""b''""
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf"
+2026-03-22 20:29:37,saving,🔄 Falling back to HTML output due to PDF generation failure
+2026-03-22 20:29:37,uploading,📤 Uploading PDF to Google Cloud Storage...
+2026-03-22 20:29:40,uploading,✅ PDF uploaded successfully to english folder: english/20260322_202937_20260322_1a553908_english.html
+2026-03-22 20:29:40,url,🌐 Public URL: https://storage.googleapis.com/generated-report-ai/english/20260322_202937_20260322_1a553908_english.html
+2026-03-22 20:29:40,metrics,======================================================================
+2026-03-22 20:29:40,metrics,📊 Overall Total Usage:
+2026-03-22 20:29:40,metrics,"   ├─ Total Input Tokens:  11,507"
+2026-03-22 20:29:40,metrics,"   ├─ Total Output Tokens: 4,938"
+2026-03-22 20:29:40,metrics,"   └─ Total All Tokens:   16,445"
+2026-03-22 20:29:40,metrics,   └─ Total Cost:         $0.043707
+2026-03-22 20:29:40,metrics,======================================================================
+2026-03-22 20:29:40,completed,✅ Report generation process completed!

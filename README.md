@@ -27,7 +27,7 @@ A WebSocket-based application for generating credit card market analysis reports
      ```
    - Set environment variables in a `.env` file:
      ```
-     GOOGLE_CLOUD_PROJECT=singular-agent-476403-u1
+     GOOGLE_CLOUD_PROJECT=myagent-qitv
      WKHTMLTOPDF_PATH=C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe  # Adjust for your system
      ```
    - Run the FastAPI server:

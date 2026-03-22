@@ -4,7 +4,7 @@ from google.genai import types
 def generate():
   client = genai.Client(
       vertexai=True,
-      project="singular-agent-476403-u1",
+      project="myagent-qitv",
       location="us-central1",
   )
 
